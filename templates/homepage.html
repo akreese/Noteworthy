@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Noteworthy Homepage{% endblock %}
+
+{% block body %}
+    <h1>Welcome!</h1>
+
+    <h2>Login</h2>
+    <form id= "login_form">
+        <p id="email">
+            Email <input type="text" name="email">
+        </p>
+
+        <p id="password">
+            Password <input type="text" name="password">
+        </p>
+
+        <input id="login_button" type="submit">
+    </form>  
+
+    <h2>Are you new here?</h2>
+        <button id="create_button" type="button">Create Profile</button>
+
+    <script src="/static/noteworthy.js"></script>
+{% endblock %}
