@@ -1,7 +1,7 @@
 'use strict'
 
 
-
+// --------------HOMEPAGE JS------------------
 // Login information/button 
 
 const loginButton = document.querySelector('#login_button');
@@ -16,25 +16,22 @@ function validateUser(event){
     fetch(url)
         .then((response) => response.json())
         .then((responseData) => {
-            // console.log(responseData.message);
             if (!responseData.success) {
-                // console.log('FALSE');
                 alert(responseData.message);
             } else {
                 window.location.href = "http://localhost:5000/profile"
             }
-
-            // document.querySelector('#email').innerText = responseData['email'];
-            // document.querySelector('#password').innerText = responseData['password'];
-            // if ('success' == False) {
-            //     return flash("The email and/or password you have entered was incorrect");
-            // } else {
-            //     return flash("Welcome back!");
-            // };
     });
     event.preventDefault(); 
 };
 form.addEventListener('submit', validateUser);
 
 
+// Creat new profile button
+
+const createLoginButton = document.querySelector('#create_button');
+function handleClick() {
+    window.location.href = "http://localhost:5000/createprofile"
+};
+createLoginButton.addEventListener('click', handleClick);
 
