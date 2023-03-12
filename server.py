@@ -43,58 +43,39 @@ def validate_user():
 def new_user():
     """Create new user."""
 
-    # fname = request.form.get("fname")
-    # lname = request.form.get("lname")
-    # email = request.form.get("email")
-    # password = request.form.get("password")
-
-    # user = crud.get_user_by_email(email)
-
-    # if user:
-    #     flash("Email already in use. Please use another one.")
-    # else:
-    #     user = crud.create_user(fname, lname, email, password)
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     flash("Account Created!")
-
-    #     return redirect("/profile/<user_id>")
-
     return render_template('newuser.html')
+
+
 
 @app.route('/api/createUser', methods=['POST'])
 def create_user():
-    print('CREATE USER CALLED')
-    print(request.data)
-    return jsonify({'success': False, 'message':'The email or password you entered was incorrect.'})
+    """Add new user to database."""
+    print(request)
+    fname = request.json.get("fname")
+    lname = request.json.get("lname")
+    email = request.json.get("email")
+    password = request.json.get("password")
+    password_2 = request.json.get("rePassword")
+    
+    user = crud.get_user_by_email(email)
 
-    # fname = request.form.get("fname")
-    # lname = request.form.get("lname")
-    # email = request.form.get("email")
-    # password = request.form.get("password")
+    if user:
+        return jsonify({'success': False, 'message': "Email already in use. Please use another one."})
+    else:
+        if password != password_2:
+            return jsonify({'success': False, 'message': "Passwords do not match. Please double check password."})
 
-    # user = crud.get_user_by_email(email)
+        else:
+            user = crud.create_user(fname, lname, email, password)
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({'success': True})
 
-    # if user:
-    #     flash("Email already in use. Please use another one.")
-    # else:
-    #     user = crud.create_user(fname, lname, email, password)
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     flash("Account Created!")
 
-    #     return redirect("/profile/<user_id>")
-    # """See if email has already been used."""
-    # request_email = request.args.get("email")
 
-    # user = crud.get_user_by_email(request_email) 
 
-    # if user:
-    #     return jsonify({'success': False, 'message': "12"})
-    # else:
-    #     return jsonify({'success': True,
-    #                 'email': user.email,
-    #                 'password': user.password})
+
+
 
 @app.route('/profile')
 def user_profile():
