@@ -36,19 +36,19 @@ class UserList(db.Model):
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.user_id"))
     
-    listmedias = db.relationship("ListMedia", back_populates="userlist")
+    formMaps = db.relationship("FormMap", back_populates="userlist")
     user = db.relationship("User", back_populates="userlists")
     
     def __repr__(self):
         return f"<UserList userlist_id={self.userlist_id} name={self.name}"
 
 
-class ListMedia(db.Model):
+class FormMap(db.Model):
     """Media that makes up a User's list."""
 
-    __tablename__ = "listMedias"
+    __tablename__ = "formMaps"
 
-    listmedia_id = db.Column(db.Integer,
+    formMap_id = db.Column(db.Integer,
                             autoincrement=True,
                             primary_key=True)
     userlist_id = db.Column(db.Integer,
@@ -56,11 +56,11 @@ class ListMedia(db.Model):
     form_id = db.Column(db.Integer,
                         db.ForeignKey("forms.form_id"))
     
-    userlist = db.relationship("UserList", back_populates="listmedias")
-    form = db.relationship("Form", back_populates="listmedia")
+    userlist = db.relationship("UserList", back_populates="formMaps")
+    form = db.relationship("Form", back_populates="formMap")
     
     def __repr__(self):
-        return f"<ListMedia listmedia_id={self.listmedia_id} form_id={self.form_id}"
+        return f"<FormMap formMap_id_id={self.formMap_id} form_id={self.form_id}"
 
 
 class Form(db.Model):
@@ -82,7 +82,7 @@ class Form(db.Model):
 
     media = db.relationship("Media", back_populates="forms")
     user = db.relationship("User", back_populates="forms")
-    listmedia = db.relationship("ListMedia", back_populates="form")
+    formMap = db.relationship("FormMap", back_populates="form")
 
     def __repr__(self):
         return f"<Form form_id={self.form_id} created_at={self.created_at}>"

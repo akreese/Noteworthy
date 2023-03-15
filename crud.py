@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from Model import db, User, UserList, ListMedia, Form, Media, connect_to_db
+from Model import db, User, UserList, FormMap, Form, Media, connect_to_db
 
 def create_user(fname, lname, email, password):
     """Create and return a new user."""
@@ -38,13 +38,13 @@ def create_UserList(name, user):
     
     return userlist
 
-def create_ListMedia(userlist, form):
+def create_FormMap(userlist, form):
     """Create and return Media for a list."""
 
-    listmedia = ListMedia(userlist=userlist,
+    formMap = FormMap(userlist=userlist,
                         form=form)
     
-    return listmedia
+    return formMap
 
 def create_form(media, user, rating, thoughts, recommend_or_not, created_at):
     """Create and return a form."""

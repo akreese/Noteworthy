@@ -4,6 +4,7 @@ from flask import Flask
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 from Model import connect_to_db, db
 import crud
+from datetime import datetime
 from jinja2 import StrictUndefined
 
 
@@ -51,7 +52,6 @@ def new_user():
 @app.route('/api/createUser', methods=['POST'])
 def create_user():
     """Add new user to database."""
-    print(request)
     fname = request.json.get("fname")
     lname = request.json.get("lname")
     email = request.json.get("email")
@@ -70,6 +70,7 @@ def create_user():
             user = crud.create_user(fname, lname, email, password)
             db.session.add(user)
             db.session.commit()
+            session['user_id'] = user.user_id
             return jsonify({'success': True})
 
 
@@ -81,21 +82,50 @@ def user_profile():
     user = crud.get_user_by_id(user_id)
     fname = user.fname
 
-
     return render_template('profile.html', fname=fname)
 
-@app.route('/newForm')
+
+
+@app.route('/newForm', methods=['GET'])
 def new_form():
-    """Allow's user to create a new form for media completion."""
+    """Allow's user to see form."""
 
     return render_template('form.html')
 
-@app.route('/createForm')
+
+
+@app.route('/createForm', methods=['POST'])
 def create_form():
+    """Allows user to create a new form for media completion"""
     user_id = session["user_id"]
     user = crud.get_user_by_id(user_id)
-    return 'success'
 
+    name = request.json.get("name")
+    type = request.json.get("mediaType")
+    category = request.json.get("category")
+    summary = request.json.get("summary")
+    rating = request.json.get("rating")
+    thoughts = request.json.get("thoughts")
+    recommend_or_not = request.json.get("recommend")
+    media = crud.create_media(type,name,category,summary)
+    
+    if name or type or category or summary or rating or thoughts or recommend_or_not == None:
+        return jsonify({'success': False, 'message': "Please fill out all boxes!"})
+    else:
+        now = datetime.now()
+        current_time = now.strftime("%m-%d-%Y")
+        created_at = current_time
+        form = crud.create_form(media, user, rating, thoughts, recommend_or_not, created_at)
+
+
+# @app.route('/viewLists')
+# def view_users_lists():
+#     """Allows user to view their premade or unique lists."""
+#     user_id = session["user_id"]
+#     user = crud.get_user_by_id(user_id)
+#     fname = user.fname
+
+    return render_template('viewLists', fname=fname )
 
 if __name__ == "__main__":
     connect_to_db(app)
