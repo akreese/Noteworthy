@@ -27,7 +27,7 @@ function validateUser(event){
 form.addEventListener('submit', validateUser);
 
 
-// Creat new profile button
+// Create new profile button
 
 const createLoginButton = document.querySelector('#create_button');
 function handleClick() {

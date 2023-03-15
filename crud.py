@@ -17,10 +17,17 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_user_by_id(user_id):
+    return User.query.filter(User.user_id == user_id).first()
+
+
 def get_user_password(password):
     """Returns user's password."""
 
     return User.query.filter(User.password == password).first()
+
+def get_user_list_by_user_id(user_id):
+    return UserList.query.filter(UserList.user_id == user_id).first()
 
 
 def create_UserList(name, user):

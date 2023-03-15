@@ -32,6 +32,7 @@ def validate_user():
     if not user or user.password != request_password:
         return jsonify({'success': False, 'message':'The email or password you entered was incorrect.'})
     else:
+        session['user_id'] = user.user_id
         return jsonify({'success': True,
                     'email': user.email,
                     'password': user.password})
@@ -73,18 +74,27 @@ def create_user():
 
 
 
-
-
-
-
 @app.route('/profile')
 def user_profile():
     """View User's profile"""
+    user_id = session["user_id"]
+    user = crud.get_user_by_id(user_id)
+    fname = user.fname
 
-    return render_template('profile.html')
 
+    return render_template('profile.html', fname=fname)
 
+@app.route('/newForm')
+def new_form():
+    """Allow's user to create a new form for media completion."""
 
+    return render_template('form.html')
+
+@app.route('/createForm')
+def create_form():
+    user_id = session["user_id"]
+    user = crud.get_user_by_id(user_id)
+    return 'success'
 
 
 if __name__ == "__main__":

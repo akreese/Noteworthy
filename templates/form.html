@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Form{% endblock %}
+
+{% block body %}
+    <h1>Please fill out this form! </h1>
+    <form id="new_form">
+    <p id="name">
+        Name <input type="text" name="name">
+    </p>
+
+    <p id="type">
+        <label for="media_type">Choose media's type:</label>
+        <select name="lang" id="lang-select">
+            <option value="webtoon">Webtoon</option>
+            <option value="book">Book</option>
+            <option value="tvshow">Tv Show</option>
+            <option value="movie">Movie</option>
+        </select>
+    </p>
+
+    <p id="category">
+        Category <input type="text" name="category">
+    </p>
+
+    <p id="summary">
+        Summary <input type="text" name="summary">
+    </p>
+
+    <p id="rating">
+        Whats your rating?
+
+        <input type="radio" name="rating" value="0" id="0">
+        <label for="0_stars">0 Stars</label>
+
+        <input type="radio" name="rating" value="1" id="1">
+        <label for="1_stars">1 Star</label>
+
+        <input type="radio" name="rating" value="2" id="2">
+        <label for="2_stars">2 Stars</label>
+
+        <input type="radio" name="rating" value="3" id="3">
+        <label for="3_stars">3 Stars</label>
+
+        <input type="radio" name="rating" value="4" id="4">
+        <label for="4_stars">4 Stars</label>
+
+        <input type="radio" name="rating" value="5" id="5">
+        <label for="5_stars">5 Stars</label>
+    </p>
+
+    <p id="thoughts">
+        Thoughts? <input type="text" name="thoughts">
+    </p>
+
+    <p id="recommend_or_not">
+        Would you recommend?
+
+        <input type="radio" name="recommend" value="yes" id="yes">
+        <label for="yes_recommend">Yes</label>
+
+        <input type="radio" name="recommend" value="no" id="no">
+        <label for="no_recommend">No</label>
+    </p>
+    </form>
+    <script src="/static/userProfile.js"></script>
+{% endblock %}
