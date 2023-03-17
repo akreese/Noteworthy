@@ -98,7 +98,6 @@ def new_form():
 def create_form():
     """Allows user to create a new form for media completion"""
     user_id = session["user_id"]
-    user = crud.get_user_by_id(user_id)
 
     name = request.json.get("name")
     type = request.json.get("mediaType")
@@ -107,15 +106,18 @@ def create_form():
     rating = request.json.get("rating")
     thoughts = request.json.get("thoughts")
     recommend_or_not = request.json.get("recommend")
+    #Find the media via API AND media table to see if the media has been
+    #If nothing returns
     media = crud.create_media(type,name,category,summary)
-    
-    if name or type or category or summary or rating or thoughts or recommend_or_not == None:
+
+    if (name == None) or (type == None) or (category == None) or (summary == None) or (rating == None) or (thoughts == None) or (recommend_or_not == None):
         return jsonify({'success': False, 'message': "Please fill out all boxes!"})
     else:
         now = datetime.now()
         current_time = now.strftime("%m-%d-%Y")
         created_at = current_time
-        form = crud.create_form(media, user, rating, thoughts, recommend_or_not, created_at)
+        form = crud.create_form(media.media_id, user_id, rating, thoughts, recommend_or_not, created_at)
+        return jsonify({'success': True})
 
 
 # @app.route('/viewLists')

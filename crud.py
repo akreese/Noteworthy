@@ -30,27 +30,27 @@ def get_user_list_by_user_id(user_id):
     return UserList.query.filter(UserList.user_id == user_id).first()
 
 
-def create_UserList(name, user):
+def create_UserList(name, user_id):
     """Create and return a User's List."""
 
     userlist = UserList(name=name,
-                        user=user)
+                        user_id=user_id)
     
     return userlist
 
-def create_FormMap(userlist, form):
+def create_FormMap(userlist_id, form_id):
     """Create and return Media for a list."""
 
-    formMap = FormMap(userlist=userlist,
-                        form=form)
+    formMap = FormMap(userlist_id=userlist_id,
+                        form_id=form_id)
     
     return formMap
 
-def create_form(media, user, rating, thoughts, recommend_or_not, created_at):
+def create_form(media_id, user_id, rating, thoughts, recommend_or_not, created_at):
     """Create and return a form."""
 
-    form = Form(media=media,
-                user=user,
+    form = Form(media_id=media_id,
+                user_id=user_id,
                 rating=rating,
                 thoughts=thoughts,
                 recommend_or_not=recommend_or_not,

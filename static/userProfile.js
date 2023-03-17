@@ -24,9 +24,3 @@ createFormButton.addEventListener('click', handleClick);
 
 
 // View Lists
-
-// const viewListsButton = document.querySelector('#view_lists');
-// function handleClick() {
-//     window.location.href = "http://localhost:5000/"
-// };
-// viewListsButton.addEventListener('click', handleClick);

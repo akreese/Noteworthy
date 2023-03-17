@@ -7,14 +7,15 @@
 document.getElementById('new_form').addEventListener('submit', (evt) => {
     evt.preventDefault();
 
+
     const formInputs = {
         name: document.querySelector('input[name="name"]').value,
-        mediaType: document.querySelector('#type').value,
+        mediaType: document.querySelector('#type-select').value,
         category: document.querySelector('input[name="category"]').value,
         summary: document.querySelector('input[name="summary"]').value,
-        rating: document.querySelector('#rating').value,
+        rating: document.querySelector('#rate-select').value,
         thoughts: document.querySelector('input[name="thoughts"]').value,
-        recommend: document.querySelector('#recommend_or_not').value,
+        recommend: document.querySelector('#rec-select').value,
     };
     fetch('/createForm', {
         method: 'POST',

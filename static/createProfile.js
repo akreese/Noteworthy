@@ -26,8 +26,8 @@ document.getElementById('new_user_form').addEventListener('submit', (evt) => {
         .then((responseJson) => {
             if (!responseJson.success) {
                 alert(responseJson.message);
-        } else {
-            window.location.href = "http://localhost:5000/profile"
-        };
+            } else {
+                window.location.href = "http://localhost:5000/profile"
+            };
+            });
         });
-});
