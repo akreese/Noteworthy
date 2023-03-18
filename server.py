@@ -81,8 +81,9 @@ def user_profile():
     user_id = session["user_id"]
     user = crud.get_user_by_id(user_id)
     fname = user.fname
-
-    return render_template('profile.html', fname=fname)
+    forms = crud.get_forms(user_id)
+    
+    return render_template('profile.html', fname=fname, forms=forms)
 
 
 
@@ -119,6 +120,28 @@ def create_form():
         form = crud.create_form(media.media_id, user_id, rating, thoughts, recommend_or_not, created_at)
         return jsonify({'success': True})
 
+@app.route('/newList', methods=['GET'])
+def new_list():
+    """Allows user to create a new list."""
+    
+    return render_template('createList.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @app.route('/viewLists')
 # def view_users_lists():
@@ -127,7 +150,7 @@ def create_form():
 #     user = crud.get_user_by_id(user_id)
 #     fname = user.fname
 
-    return render_template('viewLists', fname=fname )
+    # return render_template('viewLists', fname=fname )
 
 if __name__ == "__main__":
     connect_to_db(app)

@@ -17,7 +17,10 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+
 def get_user_by_id(user_id):
+    """Returns a user by ID."""
+
     return User.query.filter(User.user_id == user_id).first()
 
 
@@ -26,7 +29,10 @@ def get_user_password(password):
 
     return User.query.filter(User.password == password).first()
 
+
 def get_user_list_by_user_id(user_id):
+    """Returns a user's list by their ID."""
+
     return UserList.query.filter(UserList.user_id == user_id).first()
 
 
@@ -58,6 +64,17 @@ def create_form(media_id, user_id, rating, thoughts, recommend_or_not, created_a
     
     return form
 
+
+def get_forms(user_id):
+    """Return all forms filled out by user."""
+
+    return Form.query.filter(Form.user_id == user_id).all()
+
+def get_media_from_forms(media_id):
+    """Return media id from the pulled form."""
+
+    return Form.query.filter(Form.media_id == media_id).first()
+
 def create_media(type, name, category, summary):
     """Create and return a specific media."""
 
@@ -68,13 +85,10 @@ def create_media(type, name, category, summary):
     
     return media
 
-# def create_MediaType(type):
-#     """Create and return a media's type"""
+def get_media(media_id):
+    """Returns media id for that media."""
 
-#     mediatype = MediaType(type=type)
-
-#     return mediatype
-
+    return Media.query.filter(Media.media_id == media_id).first()
 
 
 if __name__ == '__main__':

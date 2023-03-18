@@ -11,7 +11,13 @@
         <button id="new_list" type="button">New List</button>
 
     <h2>View Lists</h2>
-        
+        {% for form in forms %}
+            <p>Media ID: {{form.media_id}}</p>
+            <p>Rating: {{form.rating}}</p>
+            <p>Thoughts: {{form.thoughts}}</p>
+            <p>Recommendation?: {{form.recommend_or_not}}</p>
+            <br>
+        {% endfor %}
 
     <script src="/static/userProfile.js"></script>
 {% endblock %}

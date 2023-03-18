@@ -51,7 +51,7 @@ for n in range(10):
     for _ in range(10):
         media = choice(media_in_db)
         rating = randint(1,5)
-        thoughts = f"These are my thoughts for {media}"
+        thoughts = f"These are my thoughts for {media.name}"
         recommend_or_not = choice(recommend)
         created_at = current_time
 

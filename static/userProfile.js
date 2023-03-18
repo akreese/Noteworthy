@@ -16,11 +16,10 @@ createFormButton.addEventListener('click', handleClick);
 
 // Create new list
 
-// const createListButton = document.querySelector('#new_list');
-// function handleClick() {
-//     window.location.href = "http://localhost:5000/"
-// };
-// createListButton.addEventListener('click', handleClick);
+const createListButton = document.querySelector('#new_list');
+function handleClick() {
+    window.location.href = "http://localhost:5000/newList"
+};
+createListButton.addEventListener('click', handleClick);
 
 
-// View Lists
