@@ -7,24 +7,24 @@
         <p id="name">
             What would you like to name this list? <input type="text" name="name">
         </p>
-        <p> What Media would you like to add to this new list?</p>
-        <!-- {% for form in forms %}
-            <p>Media Name: {{form.media_name}}</p>
-            <p>Media ID: {{form.media_id}}</p>
-            <p>Rating: {{form.rating}}</p>
-            <p>Thoughts: {{form.thoughts}}</p>
-            <p>Recommendation?: {{form.recommend_or_not}}</p>
+        <br>
+        <h2>What Media would you like to add to this new list?</h2>
+        <input id = "search_bar" type="text" placeholder="Search Media...">
+        <br>
+        <br>
+        {% for media_and_form in full_forms %}
             <br>
-        {% endfor %} -->
-        {% for meida_and_form in full_forms %}
-            <p>Media Name: {{meida_and_form['media'].name}}</p>
-            <p>Media ID: {{meida_and_form['form'].media_id}}</p>
-            <p>Rating: {{meida_and_form['form'].rating}}</p>
-            <p>Thoughts: {{meida_and_form['form'].thoughts}}</p>
-            <p>Recommendation?: {{meida_and_form['form'].recommend_or_not}}</p>
+            <p>Name: {{media_and_form['media'].name}}</p>
+            <p>Category: {{media_and_form['media'].category}}</p>
+            <p>Summary: {{media_and_form['media'].summary}}</p>
+            <p>Rating: {{media_and_form['form'].rating}}/5 Stars</p>
+            <p>Thoughts: {{media_and_form['form'].thoughts}}</p>
+            <p>Recommendation?: {{media_and_form['form'].recommend_or_not}}</p>
+            <button id="add_to_list" type="button">Add to List</button>
+            <br>
             <br>
         {% endfor %}
-        
+        <br>
         <input id="form_submit" type="submit">
     </form>
 {% endblock %}
