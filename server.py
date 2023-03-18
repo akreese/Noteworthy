@@ -81,9 +81,8 @@ def user_profile():
     user_id = session["user_id"]
     user = crud.get_user_by_id(user_id)
     fname = user.fname
-    forms = crud.get_forms(user_id)
     
-    return render_template('profile.html', fname=fname, forms=forms)
+    return render_template('profile.html', fname=fname)
 
 
 
@@ -123,8 +122,19 @@ def create_form():
 @app.route('/newList', methods=['GET'])
 def new_list():
     """Allows user to create a new list."""
-    
-    return render_template('createList.html')
+    user_id = session["user_id"]
+    forms = crud.get_forms_by_user_id(user_id)
+    full_forms = []
+    for form in forms:
+        media_and_form = {}
+        media_id = form.media_id
+        media = crud.get_media_by_id(media_id)
+        media_and_form['form'] = form
+        media_and_form['media'] = media
+        full_forms.append(media_and_form)
+
+
+    return render_template('createList.html', forms=forms, full_forms=full_forms)
 
 
 

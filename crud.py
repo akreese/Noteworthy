@@ -65,7 +65,7 @@ def create_form(media_id, user_id, rating, thoughts, recommend_or_not, created_a
     return form
 
 
-def get_forms(user_id):
+def get_forms_by_user_id(user_id):
     """Return all forms filled out by user."""
 
     return Form.query.filter(Form.user_id == user_id).all()
@@ -85,7 +85,7 @@ def create_media(type, name, category, summary):
     
     return media
 
-def get_media(media_id):
+def get_media_by_id(media_id):
     """Returns media id for that media."""
 
     return Media.query.filter(Media.media_id == media_id).first()

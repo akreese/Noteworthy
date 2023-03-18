@@ -7,9 +7,24 @@
         <p id="name">
             What would you like to name this list? <input type="text" name="name">
         </p>
-    
+        <p> What Media would you like to add to this new list?</p>
+        <!-- {% for form in forms %}
+            <p>Media Name: {{form.media_name}}</p>
+            <p>Media ID: {{form.media_id}}</p>
+            <p>Rating: {{form.rating}}</p>
+            <p>Thoughts: {{form.thoughts}}</p>
+            <p>Recommendation?: {{form.recommend_or_not}}</p>
+            <br>
+        {% endfor %} -->
+        {% for meida_and_form in full_forms %}
+            <p>Media Name: {{meida_and_form['media'].name}}</p>
+            <p>Media ID: {{meida_and_form['form'].media_id}}</p>
+            <p>Rating: {{meida_and_form['form'].rating}}</p>
+            <p>Thoughts: {{meida_and_form['form'].thoughts}}</p>
+            <p>Recommendation?: {{meida_and_form['form'].recommend_or_not}}</p>
+            <br>
+        {% endfor %}
         
         <input id="form_submit" type="submit">
     </form>
-    <!-- <script src="/static/form.js"></script> -->
 {% endblock %}

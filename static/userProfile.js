@@ -17,9 +17,9 @@ createFormButton.addEventListener('click', handleClick);
 // Create new list
 
 const createListButton = document.querySelector('#new_list');
-function handleClick() {
+function handleClick2() {
     window.location.href = "http://localhost:5000/newList"
 };
-createListButton.addEventListener('click', handleClick);
+createListButton.addEventListener('click', handleClick2);
 
 
