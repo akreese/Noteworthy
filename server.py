@@ -94,8 +94,6 @@ def user_profile():
     fname = user.fname
 
     lists = crud.get_all_user_list_by_user_id(user_id)
-    print('LIST!!!')
-    print(lists)
     return render_template('profile.html', fname=fname, lists = lists)
 
 

@@ -44,6 +44,7 @@ for n in range(10):
 
     user = crud.create_user(fname, lname, email, password)
     Model.db.session.add(user)
+    Model.db.session.commit()
     user_id = user.user_id
     webtoons = crud.create_UserList('webtoons',user_id)
     books = crud.create_UserList('books', user_id)

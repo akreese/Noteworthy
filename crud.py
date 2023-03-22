@@ -31,9 +31,6 @@ def get_user_password(password):
 
 
 def get_all_user_list_by_user_id(user_id):
-    print('hello')
-    print(user_id)
-
     """Returns a user's list by their ID."""
 
     return UserList.query.filter(UserList.user_id == user_id).all()
