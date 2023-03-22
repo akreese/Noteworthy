@@ -11,6 +11,9 @@
         <button id="new_list" type="button">New List</button>
 
     <h2>View Lists</h2>
+    {% for list in lists %}
+        <p>{{list.name}}</p>
+        {% endfor %}
 
     <script src="/static/userProfile.js"></script>
 {% endblock %}

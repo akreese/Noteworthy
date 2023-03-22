@@ -30,10 +30,13 @@ def get_user_password(password):
     return User.query.filter(User.password == password).first()
 
 
-def get_user_list_by_user_id(user_id):
+def get_all_user_list_by_user_id(user_id):
+    print('hello')
+    print(user_id)
+
     """Returns a user's list by their ID."""
 
-    return UserList.query.filter(UserList.user_id == user_id).first()
+    return UserList.query.filter(UserList.user_id == user_id).all()
 
 
 def create_UserList(name, user_id):
@@ -44,6 +47,22 @@ def create_UserList(name, user_id):
     
     return userlist
 
+def get_list_by_name(name):
+    """Returns a list by it's name."""
+
+    return UserList.query.filter(UserList.name == name).first()
+
+def get_all_lists():
+    """Returns all lists."""
+
+    return UserList.query.all()
+
+def get_list_by_name_and_user_id(name, user_id):
+    """Returns list by name and user id."""
+
+    return UserList.query.filter(UserList.name == name, UserList.user_id == user_id).first()
+    
+
 def create_FormMap(userlist_id, form_id):
     """Create and return Media for a list."""
 
@@ -52,16 +71,15 @@ def create_FormMap(userlist_id, form_id):
     
     return formMap
 
-def create_form(media_id, user_id, rating, thoughts, recommend_or_not, created_at):
+def create_form(media, user, rating, thoughts, recommend_or_not, created_at):
     """Create and return a form."""
 
-    form = Form(media_id=media_id,
-                user_id=user_id,
+    form = Form(media=media,
+                user=user,
                 rating=rating,
                 thoughts=thoughts,
                 recommend_or_not=recommend_or_not,
                 created_at=created_at)
-    
     return form
 
 
@@ -82,7 +100,6 @@ def create_media(type, name, category, summary):
                 name=name,
                 category=category,
                 summary=summary)
-    
     return media
 
 def get_media_by_id(media_id):

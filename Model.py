@@ -43,6 +43,7 @@ class UserList(db.Model):
         return f"<UserList userlist_id={self.userlist_id} name={self.name}"
 
 
+
 class FormMap(db.Model):
     """Media that makes up a User's list."""
 

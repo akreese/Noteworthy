@@ -44,6 +44,15 @@ for n in range(10):
 
     user = crud.create_user(fname, lname, email, password)
     Model.db.session.add(user)
+    user_id = user.user_id
+    webtoons = crud.create_UserList('webtoons',user_id)
+    books = crud.create_UserList('books', user_id)
+    tvshows = crud.create_UserList('tvshows', user_id)
+    movies = crud.create_UserList('movies', user_id)
+    Model.db.session.add(webtoons)
+    Model.db.session.add(books)
+    Model.db.session.add(tvshows)
+    Model.db.session.add(movies)
 
     now = datetime.now()
     current_time = now.strftime("%m-%d-%Y")
