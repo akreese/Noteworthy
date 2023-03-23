@@ -59,6 +59,10 @@ def get_list_by_name_and_user_id(name, user_id):
 
     return UserList.query.filter(UserList.name == name, UserList.user_id == user_id).first()
     
+def get_list_by_id(userlist_id):
+    """Return List by ID."""
+
+    return UserList.query.filter(UserList.userlist_id == userlist_id).first()
 
 def create_FormMap(userlist_id, form_id):
     """Create and return Media for a list."""

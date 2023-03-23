@@ -13,7 +13,7 @@
     <h2>View Lists</h2>
     {% for list in lists %}
         <p>{{list.name}}</p>
-        <button id={{list.name}} onclick="fetchProfile(this)" id="view_button" type="button">View</button>
+        <button id={{list.userlist_id}} onclick="fetchProfile(this)" id="view_button" type="button">View</button>
         <br>
         <br>
         {% endfor %}

@@ -90,6 +90,9 @@ def create_user():
 def user_profile():
     """View User's profile"""
     user_id = session["user_id"]
+    if "list_id" in session:
+        del session["list_id"]
+
     user = crud.get_user_by_id(user_id)
     fname = user.fname
     lists = crud.get_all_user_list_by_user_id(user_id)
@@ -136,23 +139,23 @@ def create_form():
         db.session.commit()
 
         if type.lower() == 'webtoon':
-            user_list = crud.get_list_by_name_and_user_id('webtoons',user_id)
+            user_list = crud.get_list_by_name_and_user_id('Webtoons',user_id)
             form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
 
         if type.lower() == 'book':
-            user_list = crud.get_list_by_name_and_user_id('books',user_id)
+            user_list = crud.get_list_by_name_and_user_id('Books',user_id)
             form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
         if type.lower() == 'tvshow':
-            user_list = crud.get_list_by_name_and_user_id('tvshows',user_id)
+            user_list = crud.get_list_by_name_and_user_id('TV Shows',user_id)
             form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
         if type.lower() == 'movie':
-            user_list = crud.get_list_by_name_and_user_id('movies',user_id)
+            user_list = crud.get_list_by_name_and_user_id('Movies',user_id)
             form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
@@ -181,23 +184,51 @@ def new_list():
 def create_list():
     """Allows user to create a new list."""
     user_id = session["user_id"]
-    user = crud.get_user_by_id(user_id)
-    return None
+    name = request.json.get("name")
+    
+    if (name == None):
+        return jsonify({'success': False, 'message': "Please fill out all boxes!"})
+    else:
+        list = crud.create_UserList(name, user_id)
+        db.session.add(list)
+        db.session.commit()
+        session['list_id'] = list.userlist_id
+
+        return jsonify({'success': True, 'message': "List Created!"})
+
+@app.route('/addFormToList', methods=['POST'])
+def add_form_to_list():
+    if 'list_id' in session:
+        current_list_id = session['list_id']
+    else:
+        return jsonify({'success': False, 'message': "Please Create A New List First!"})
+
+    # Get List_id from the API request
+    list = crud.get_list_by_id(current_list_id)
+    # Get form_id from the API request
+    form_id = request.json.get("selectedFormId")
+    #Create a form map for the selected form and the created list
+    form_map = crud.create_FormMap(list.userlist_id, form_id)
+    db.session.add(form_map)
+    db.session.commit()
+
+    return  jsonify({'success': True})
 
 
-@app.route('/viewLists/<name>', methods=['GET'])
-def view_users_lists(name):
+
+
+
+
+
+
+@app.route('/viewLists/<list_id>', methods=['GET'])
+def view_users_lists(list_id):
     """Allows user to view their premade or unique lists."""
     user_id = session["user_id"]
-    # list_name = request.args.get('name', '')
-    user = crud.get_user_by_id(user_id)
-    # Find the user list for the current list
-    current_list = crud.get_list_by_name_and_user_id(name, user_id)
-    # From the list above, get the id and find all the formMaps with the list_id
+    current_list = crud.get_list_by_id(list_id)
+    # current_list = crud.get_list_by_name_and_user_id(name, user_id)
     form_maps = crud.get_form_map_by_list_id(current_list.userlist_id)
-    # From the formMaps, get form with the form_id from the formMap
     all_forms = []
-    # form_maps = [{FM fm_id, list_id, form_id}, {FM fm_id, list_id, form_id], {FM}, {FM}]
     for form_map in form_maps:
         form = crud.get_form_from_form_id(form_map.form_id)
         all_forms.append(form)
@@ -209,11 +240,10 @@ def view_users_lists(name):
         media_and_form['form'] = form
         media_and_form['media'] = media
         full_forms.append(media_and_form)
-
-    # Pass in the forms to the FE
     
+    return render_template('viewList.html', name=current_list.name, full_forms=full_forms)
 
-    return render_template('viewList.html', name=name, full_forms=full_forms)
+
 
 if __name__ == "__main__":
     connect_to_db(app)

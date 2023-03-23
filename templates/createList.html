@@ -6,6 +6,7 @@
     <form id="new_list">
         <p id="name">
             What would you like to name this list? <input type="text" name="name">
+            <input id="form_submit" type="submit">
         </p>
         <br>
         <h2>What Media would you like to add to this new list?</h2>
@@ -28,14 +29,15 @@
                     <!-- <p>Thoughts: {{media_and_form['form'].thoughts}}</p> -->
                     <div class="recommend_or_not">Recommendation?: {{media_and_form['form'].recommend_or_not}}</div>
                     <!-- <p>Recommendation?: {{media_and_form['form'].recommend_or_not}}</p> -->
-                    <button id="add_to_list" type="button">Add to List</button>
+                    <button id="{{media_and_form['form'].form_id}}" onclick="addToList(this)" type="button">Add to List</button>
                     <br>
                     <br>
                 {% endfor %}
             </div>
         </div>
         <br>
-        <input id="form_submit" type="submit">
+        <h3></h3>Finished?</h3>
+        <button id="finished_button" type="button">Go Back To Profile</button>
     </form>
     <script src="/static/createList.js"></script>
 {% endblock %}
