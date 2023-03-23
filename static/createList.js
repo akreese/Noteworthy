@@ -3,26 +3,9 @@
 // ----------SEARCH COMPLETED FORMS JS-------------
 // Allowing user to search completed forms through the search bar
 
-document.getElementById('search_bar').addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-
-const mediaForm = document.querySelector('form')
-const media = mediaForm.content.cloneNode(true).children[0]
-console.log(media)
-
-
-
-
-
-
-
-
-
-
-
-
-});
+// document.getElementById('search_bar').addEventListener('click', (evt) => {
+//     evt.preventDefault();
+// });
 
 // ----------CREATE LIST JS------------------
 // Creating a new list with input from new list form

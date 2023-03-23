@@ -92,8 +92,8 @@ def user_profile():
     user_id = session["user_id"]
     user = crud.get_user_by_id(user_id)
     fname = user.fname
-
     lists = crud.get_all_user_list_by_user_id(user_id)
+
     return render_template('profile.html', fname=fname, lists = lists)
 
 
@@ -185,14 +185,23 @@ def create_list():
     return None
 
 
-@app.route('/viewLists')
-def view_users_lists():
+@app.route('/viewLists/<name>', methods=['GET'])
+def view_users_lists(name):
     """Allows user to view their premade or unique lists."""
     user_id = session["user_id"]
+    # list_name = request.args.get('name', '')
     user = crud.get_user_by_id(user_id)
-    fname = user.fname
+    # Find the user list for the current list
+    current_list = crud.get_list_by_name_and_user_id(name, user_id)
+    print(current_list)
+    # From the list above, get the id and find all the formMaps with the list_id
+    
+    # From the formMaps, get forms with the form_id from the formMap
 
-    return render_template('viewLists', fname=fname )
+    # Pass in the forms to the FE
+    
+
+    return render_template('viewList.html')
 
 if __name__ == "__main__":
     connect_to_db(app)

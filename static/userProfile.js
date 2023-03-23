@@ -23,3 +23,13 @@ function handleClick2() {
 createListButton.addEventListener('click', handleClick2);
 
 
+// Allow users to view their lists.
+
+
+function fetchProfile(buttonElement) {
+    // const url = `http://localhost:5000/viewLists?name=${buttonElement.id}`
+    const url = "http://localhost:5000/viewLists/" + buttonElement.id
+
+    window.location.href = url
+    // console.log(buttonElement.id)
+};
