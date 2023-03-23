@@ -2,7 +2,25 @@
 {% block title %}View List{% endblock %}
 
 {% block body %}
-    <h1>Hi</h1>
-
+    <h1>{{name}} I've Completed</h1>
+    <div class = "media_forms">
+        <div class = "form">
+            {% for media_and_form in full_forms %}
+                <br>
+                <div class="name">Name: {{media_and_form['media'].name}}</div>
+                <!-- <p>Name: {{media_and_form['media'].name}}</p> -->
+                <div class="category">Category: {{media_and_form['media'].category}}</div>
+                <!-- <p>Category: {{media_and_form['media'].category}}</p> -->
+                <div class="summary">Summary: {{media_and_form['media'].summary}}</div>
+                <!-- <p>Summary: {{media_and_form['media'].summary}}</p> -->
+                <div class="rating">Rating: {{media_and_form['form'].rating}}/5 Stars</div>
+                <!-- <p>Rating: {{media_and_form['form'].rating}}/5 Stars</p> -->
+                <div class="thoughts">Thoughts: {{media_and_form['form'].thoughts}}</div>
+                <!-- <p>Thoughts: {{media_and_form['form'].thoughts}}</p> -->
+                <div class="recommend_or_not">Recommendation?: {{media_and_form['form'].recommend_or_not}}</div>
+                <!-- <p>Recommendation?: {{media_and_form['form'].recommend_or_not}}</p> -->
+            {% endfor %}
+        </div>
+    </div>
     <!-- <script src="/static/userProfile.js"></script> -->
 {% endblock %}

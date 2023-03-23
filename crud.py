@@ -68,6 +68,16 @@ def create_FormMap(userlist_id, form_id):
     
     return formMap
 
+def get_form_map_by_list_id(userlist_id):
+    """Returns form maps associated with that specific list id."""
+
+    return FormMap.query.filter(FormMap.userlist_id == userlist_id).all()
+
+def get_form_from_form_id(form_id):
+
+    return Form.query.filter(Form.form_id == form_id).first()
+
+
 def create_form(media, user, rating, thoughts, recommend_or_not, created_at):
     """Create and return a form."""
 

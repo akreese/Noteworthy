@@ -72,10 +72,10 @@ def create_user():
             db.session.commit()
             user_id = user.user_id 
 
-            webtoons = crud.create_UserList('webtoons',user_id)
-            books = crud.create_UserList('books', user_id)
-            tvshows = crud.create_UserList('tvshows', user_id)
-            movies = crud.create_UserList('movies', user_id)
+            webtoons = crud.create_UserList('Webtoons',user_id)
+            books = crud.create_UserList('Books', user_id)
+            tvshows = crud.create_UserList('TV Shows', user_id)
+            movies = crud.create_UserList('Movies', user_id)
             db.session.add(webtoons)
             db.session.add(books)
             db.session.add(tvshows)
@@ -137,23 +137,23 @@ def create_form():
 
         if type.lower() == 'webtoon':
             user_list = crud.get_list_by_name_and_user_id('webtoons',user_id)
-            form_map = crud.create_FormMap(user_list.userList_id,form.form_id)
+            form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
 
         if type.lower() == 'book':
             user_list = crud.get_list_by_name_and_user_id('books',user_id)
-            form_map = crud.create_FormMap(user_list.userList_id,form.form_id)
+            form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
         if type.lower() == 'tvshow':
             user_list = crud.get_list_by_name_and_user_id('tvshows',user_id)
-            form_map = crud.create_FormMap(user_list.userList_id,form.form_id)
+            form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
         if type.lower() == 'movie':
             user_list = crud.get_list_by_name_and_user_id('movies',user_id)
-            form_map = crud.create_FormMap(user_list.userList_id,form.form_id)
+            form_map = crud.create_FormMap(user_list.userlist_id,form.form_id)
             db.session.add(form_map)
             db.session.commit()
 
@@ -193,15 +193,27 @@ def view_users_lists(name):
     user = crud.get_user_by_id(user_id)
     # Find the user list for the current list
     current_list = crud.get_list_by_name_and_user_id(name, user_id)
-    print(current_list)
     # From the list above, get the id and find all the formMaps with the list_id
-    
-    # From the formMaps, get forms with the form_id from the formMap
+    form_maps = crud.get_form_map_by_list_id(current_list.userlist_id)
+    # From the formMaps, get form with the form_id from the formMap
+    all_forms = []
+    # form_maps = [{FM fm_id, list_id, form_id}, {FM fm_id, list_id, form_id], {FM}, {FM}]
+    for form_map in form_maps:
+        form = crud.get_form_from_form_id(form_map.form_id)
+        all_forms.append(form)
+    full_forms = []
+    for form in all_forms:
+        media_and_form = {}
+        media_id = form.media_id
+        media = crud.get_media_by_id(media_id)
+        media_and_form['form'] = form
+        media_and_form['media'] = media
+        full_forms.append(media_and_form)
 
     # Pass in the forms to the FE
     
 
-    return render_template('viewList.html')
+    return render_template('viewList.html', name=name, full_forms=full_forms)
 
 if __name__ == "__main__":
     connect_to_db(app)
