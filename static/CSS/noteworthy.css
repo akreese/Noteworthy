@@ -1,4 +1,33 @@
-.homepage {
-    background: url("homepage.jpg") no-repeat center center;
+body#homepage.container {
+    background: url("/static/homepage.jpg") no-repeat center center;
     background-size: cover;
+}
+h1 {
+    text-align: center;
+    font-family: "Lucida Console", Courier, monospace;;
+    font-weight: 550;
+    font-size: 90px;
+    
+}
+h2 {
+    text-align: center;
+    font-family: "Lucida Console", Courier;
+    font-weight: 400;
+    font-size: 40px;
+}
+#login_form {
+    text-align: center;
+    font-family: "Lucida Console", Courier;
+    font-size: 20px;
+}
+.create_login_button {
+    text-align: center;
+    font-family: "Lucida Console", Courier;
+    font-size: 20px;
+}
+
+#new_user_form {
+    text-align: center;
+    font-family: "Lucida Console", Courier;
+    font-size: 20px;
 }
