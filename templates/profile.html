@@ -2,21 +2,40 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-    <h1>Welcome {{fname}}</h1>
+    <!-- <h1>Welcome {{fname}}</h1> -->
+<body id="profile" class="container">
+    <!-- <h1 id="profile_header">Welcome {{fname}}</h1> -->
 
-    <h2>Complete New Media Form</h2>
-        <button id="new_form" type="button">New Form</button>
-
-    <h2>Create New List</h2>
-        <button id="new_list" type="button">New List</button>
-
-    <h2>View Lists</h2>
-    {% for list in lists %}
-        <p>{{list.name}}</p>
-        <button id={{list.userlist_id}} onclick="fetchProfile(this)" id="view_button" type="button">View</button>
+    <div id="row1">
+        <div class="column">
+        <h2>Complete New Media Form</h2>
         <br>
-        <br>
-        {% endfor %}
+            <button id="new_form" type="button">New Form</button>
+            <br>
+            <br>
+            <iframe src="https://giphy.com/embed/11ikeVaUfcXLWM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/writing-11ikeVaUfcXLWM">via GIPHY</a></p>
+        </div>
+    </div>
 
+    <div id="row2">
+        <div class="column">
+        <h2>Create New List</h2>
+        <br>
+            <button id="new_list" type="button">New List</button>
+        </div>
+    </div>
+
+    <div id="row3">
+        <div class="column">
+        <h2>View Lists</h2>
+        {% for list in lists %}
+            <p>{{list.name}}</p>
+            <button id={{list.userlist_id}} onclick="fetchProfile(this)" id="view_button" type="button">View</button>
+            <br>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
     <script src="/static/JS/userProfile.js"></script>
+</body>
 {% endblock %}
