@@ -44,9 +44,6 @@ body#profile.container {
     justify-content: flex-end;
 }
 
-#profile_header{
-    text-align: left;
-}
 
 #row1, #row2, #row3 {
     margin: 60px 15px 25px;
@@ -76,4 +73,80 @@ body#profile.container {
 
 .column {
     padding: 15px 25px;
+}
+
+body#form.container {
+    background: url("/static/notebook_paper.png");
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #c5baaf;
+    text-align: center;
+
+}
+
+#form_title {
+    font-weight: 550;
+    font-size: 60px;
+}
+
+#new_form {
+    margin: 60px 15px 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    flex-basis: 33%;
+    font-family: "Lucida Console", Courier;
+    font-size: 20px;
+    background-color: #d5aca9;
+    padding: 15px 25px;
+}
+
+body#new_list.container {
+    background: url("/static/natural_notebook.png");
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #c5baaf;
+    /* max-width: 1170px;
+    width: 100%; */
+    
+}
+.media_forms {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-row-gap: 50px;
+    grid-column-gap: 10px;
+    /* flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; */
+}
+    
+.media_forms .form .name {
+    text-decoration: underline overline;
+}
+
+
+.form {
+    margin: 5px 5px 5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    flex-basis: 33%;
+    font-family: "Lucida Console", Courier;
+    font-size: 18px;
+    background-color: #b38d97;
+    padding: 15px 25px;
+    
+}
+
+#finished {
+    font-family: "Lucida Console", Courier;
+    text-align: center;
+    font-size: 20px;
+}
+
+#new_list {
+    font-family: "Lucida Console", Courier;
+    text-align: center;
+    font-size: 20px;
 }

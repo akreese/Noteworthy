@@ -2,10 +2,13 @@
 {% block title %}Form{% endblock %}
 
 {% block body %}
-    <h1>Please fill out this form! </h1>
+<body id="form" class="container">
+    <br>
+    <br>
+    <h1 id="form_title">Please fill out this form! </h1>
     <form id="new_form">
         <p id="name">
-            Name <input type="text" name="name">
+            Name: <input type="text" name="name" style="width:400px">
         </p>
 
         <p id="type">
@@ -19,11 +22,11 @@
         </p>
 
         <p id="category">
-            Category <input type="text" name="category">
+            Category: <input type="text" name="category">
         </p>
 
         <p id="summary">
-            Summary <input type="text" name="summary">
+            Summary: <textarea name="summary" rows="5" cols="50"></textarea>
         </p>
         
 
@@ -40,7 +43,7 @@
         </p>
         
         <p id="thoughts">
-            Thoughts? <input type="text" name="thoughts">
+            Thoughts? <textarea name="thoughts" rows="5" cols="50"></textarea>
         </p>
 
 
@@ -55,4 +58,5 @@
         <input id="form_submit" type="submit">
     </form>
     <script src="/static/JS/form.js"></script>
+</body>
 {% endblock %}
