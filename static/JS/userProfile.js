@@ -7,7 +7,7 @@
 
 // Create new media form
 
-const createFormButton = document.querySelector('#new_form');
+const createFormButton = document.querySelector('#new_form_button');
 function handleClick() {
     window.location.href = "http://localhost:5000/newForm"
 };
