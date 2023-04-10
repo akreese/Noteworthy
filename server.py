@@ -1,12 +1,14 @@
 """Server for movie ratings app."""
 
 from flask import Flask
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from flask import (Flask, render_template, request,
+                   flash, session, redirect, jsonify)
 from Model import connect_to_db, db
 import crud
 from datetime import datetime
 from jinja2 import StrictUndefined
-
+import requests
+import os
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -237,6 +239,33 @@ def view_users_lists(list_id):
     
     return render_template('viewList.html', name=current_list.name, full_forms=full_forms)
 
+@app.route('/api/suggestions')
+def get_suggestions():
+    query = request.args.get('query')
+    # Make a request to the TMDb API to search for movies and TV shows
+    tmdb_api_key = '34e6115227f3afeb13733d2f8978dae9'
+    url = f'https://api.themoviedb.org/3/search/multi?api_key={tmdb_api_key}&query={query}'
+    response = requests.get(url)
+    data = response.json()
+
+    results = []
+    for result in data['results']:
+        if result['media_type'] == 'movie':
+            category = 'Movie'
+        elif result['media_type'] == 'tv':
+            category = 'TV Show'
+        else:
+            continue
+        summary = result['overview']
+        title = ""
+        if 'title' in result:
+            title = result['title']
+        elif 'name' in result:
+            title = result['name']
+        results.append(
+            {'category': category, 'summary': summary, 'title': title})
+    # Return the list of suggestions as a JSON response
+    return jsonify(results)
 
 
 if __name__ == "__main__":

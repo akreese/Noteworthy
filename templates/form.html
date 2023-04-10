@@ -2,15 +2,13 @@
 {% block title %}Form{% endblock %}
 
 {% block body %}
+
 <body id="form" class="container">
+    <link href="/static/CSS/form.css" rel="stylesheet">
     <br>
     <br>
     <h1 id="form_title">Please fill out this form! </h1>
     <form id="new_form">
-        <p id="name">
-            Name: <input type="text" name="name" style="width:400px">
-        </p>
-
         <p id="type">
             <label for="media_type">Choose media's type:</label>
             <select name="media" id="type-select">
@@ -21,14 +19,17 @@
             </select>
         </p>
 
+        <p id="name">
+            Name: <input id="searchBox" type="text" name="name" style="width:400px">
+            <button type="button" onclick="showSuggestions()">Search</button>
+        </p>
         <p id="category">
             Category: <input type="text" name="category">
         </p>
 
         <p id="summary">
-            Summary: <textarea name="summary" rows="5" cols="50"></textarea>
+            Summary: <textarea id="summary-box" name="summary" rows="5" cols="50"></textarea>
         </p>
-        
 
         <p id="rating">
             <label for="rating">Whats your rating?</label>
@@ -41,11 +42,10 @@
                 <option value="5">5 Stars</option>
             </select>
         </p>
-        
+
         <p id="thoughts">
             Thoughts? <textarea name="thoughts" rows="5" cols="50"></textarea>
         </p>
-
 
         <p id="recommend_or_not">
             <label for="recommend">Would you recommend?</label>
@@ -54,9 +54,16 @@
                 <option value="no">No</option>
             </select>
         </p>
-        
-        <input id="form_submit" type="submit">
+        <input id="new_form" type="submit">
     </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="suggestionList" class="suggestions"></div>
+        </div>
+    </div>
+
     <script src="/static/JS/form.js"></script>
 </body>
 {% endblock %}
