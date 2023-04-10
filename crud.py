@@ -78,6 +78,7 @@ def get_form_map_by_list_id(userlist_id):
     return FormMap.query.filter(FormMap.userlist_id == userlist_id).all()
 
 def get_form_from_form_id(form_id):
+    """Returns form from form id."""
 
     return Form.query.filter(Form.form_id == form_id).first()
 

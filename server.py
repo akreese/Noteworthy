@@ -215,12 +215,6 @@ def add_form_to_list():
     return  jsonify({'success': True})
 
 
-
-
-
-
-
-
 @app.route('/viewLists/<list_id>', methods=['GET'])
 def view_users_lists(list_id):
     """Allows user to view their premade or unique lists."""

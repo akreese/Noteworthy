@@ -12,9 +12,9 @@ document.getElementById('new_form').addEventListener('submit', (evt) => {
         name: document.querySelector('input[name="name"]').value,
         mediaType: document.querySelector('#type-select').value,
         category: document.querySelector('input[name="category"]').value,
-        summary: document.querySelector('input[name="summary"]').value,
+        summary: document.querySelector('textarea[name="summary"]').value,
         rating: document.querySelector('#rate-select').value,
-        thoughts: document.querySelector('input[name="thoughts"]').value,
+        thoughts: document.querySelector('textarea[name="thoughts"]').value,
         recommend: document.querySelector('#rec-select').value,
     };
     fetch('/createForm', {
