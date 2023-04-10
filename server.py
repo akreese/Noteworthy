@@ -238,8 +238,6 @@ def view_users_lists(list_id):
 def get_suggestions():
     query = request.args.get('query')
     media_type = request.args.get('type')
-    print('TYPE')
-    print(media_type)
     results = []
 
     if media_type == 'movie':
